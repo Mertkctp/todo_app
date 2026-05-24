@@ -20,7 +20,7 @@ Bu proje, React ve Tailwind CSS kullanılarak geliştirilmiş kapsamlı bir üre
 
 ## 📱 Uygulama Görselleri
 
-| Anasayfa (Karanlık Mod) | Bekleyen Görevler |
+| Anasayfa | Bekleyen Görevler |
 | :---: | :---: |
 | <img src="https://github.com/user-attachments/assets/ca723392-b3c1-49d4-bd56-eac40f3c4055" width="100%" /> | <img src="https://github.com/user-attachments/assets/2fd71e87-9e18-4d84-a470-e3f23ff60790" width="100%" /> |
 | **Tamamlanan Görevler** | **Görev Silme İşlemi** |
