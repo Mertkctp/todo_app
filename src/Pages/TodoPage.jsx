@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import TodoItem from '../Components/TodoItem';
+import { ITodo } from '../Interfaces/Todo'; 
 
 function TodoPage() {
   // --- STATE TANIMLAMALARI ---
@@ -19,7 +20,7 @@ function TodoPage() {
   const [timeLeft, setTimeLeft] = useState(25 * 60);
   const [isActive, setIsActive] = useState(false);
 
-  // Motivasyon Sözü State (Sayfa her açıldığında rastgele seçilir)
+  // Motivasyon Sözü State
   const [quote] = useState(() => {
     const quotes = [
       "Başlamak için mükemmel olmana gerek yok, ama mükemmel olmak için başlaman gerek.",
@@ -36,7 +37,7 @@ function TodoPage() {
   useEffect(() => { localStorage.setItem('my_personal_notes', notes); }, [notes]);
   useEffect(() => { localStorage.setItem('dark_mode', darkMode); }, [darkMode]);
 
-  // --- POMODORO MANTIĞI ---
+  // --- POMODORO ---
   useEffect(() => {
     let interval = null;
     if (isActive && timeLeft > 0) {
@@ -66,7 +67,16 @@ function TodoPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!inputValue.trim()) return;
-    setTodos([...todos, { id: Date.now(), text: inputValue, date: selectedDate, completed: false }]);
+
+   
+    const newTodo = {
+      id: Date.now(),
+      text: inputValue,
+      date: selectedDate,
+      completed: false
+    };
+
+    setTodos([...todos, newTodo]);
     setInputValue("");
   };
 
@@ -93,7 +103,7 @@ function TodoPage() {
         {/* SOL SÜTUN: GÖREV TAKVİMİ */}
         <div className={`lg:col-span-8 p-8 rounded-[2rem] shadow-2xl border ${darkMode ? 'bg-[#1f2937] border-gray-700' : 'bg-white border-gray-100'}`}>
           <h1 className="text-2xl font-black mb-1 tracking-tight text-indigo-400 uppercase">Görev Takvimi</h1>
-          <p className="text-[10px] mb-8 italic opacity-60 font-medium italic tracking-wide">
+          <p className="text-[10px] mb-8 italic opacity-60 font-medium tracking-wide">
             "{quote}"
           </p>
           
@@ -103,7 +113,7 @@ function TodoPage() {
               <span>%{progressPercentage}</span>
             </div>
             <div className={`h-1.5 rounded-full ${darkMode ? 'bg-gray-800' : 'bg-indigo-50'}`}>
-              <div style={{ width: `${progressPercentage}%` }} className="h-full bg-indigo-500 rounded-full transition-all duration-1000 shadow-[0_0_10px_rgba(99,102,241,0.5)]"></div>
+              <div style={{ width: `${progressPercentage}%` }} className="h-full bg-indigo-500 rounded-full transition-all duration-1000"></div>
             </div>
           </div>
 
@@ -180,10 +190,6 @@ function TodoPage() {
         </div>
 
       </div>
-      
-      <footer className="mt-12 text-center text-[8px] font-black uppercase tracking-[0.5em] opacity-20">
-        Professional Workspace v3.0
-      </footer>
     </div>
   );
 }
